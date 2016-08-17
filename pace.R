@@ -19,9 +19,9 @@ sec2pace <- function(t){
 
 
 # http://www.racetecresults.com/MyResults.aspx?uid=16432-2119-1-53149
-teamtxt <- Sys.glob('*.txt')
+teamtxt <- Sys.glob('txt/*.txt')
 
-legs.list<- lapply(teamtxt,function(x){cbind(gsub('.txt','',x),read.table(x)[,-1])})
+legs.list<- lapply(teamtxt,function(x){cbind(gsub('.txt','',basename(x)),read.table(x)[,-1])})
 legs <-
   bind_rows(legs.list) %>%
   setNames(c('team','loop','difficulty','totaltime','legtime')) %>%
@@ -97,27 +97,6 @@ dd$indark<-
 dd$indark <- round(dd$indark/dd$legtime.m,2)
 
 
-## ####
-## notdark = dd$legtime.m
-## 
-## # if sunset is between begin and end
-## notdark<-
-##  ifelse( dd$startdate < sunset & sunset < dd$finishdate, 
-##          sunset-dd$startdate,
-##          notdark)
-## # entirely in the dar
-## notdark<-
-##  ifelse( dd$startdate > sunset & sunrise > dd$finishdate,
-##        0,
-##        notdark)
-## 
-## # if sunrise is between begin and end
-## notdark<-
-##   ifelse( dd$startdate < sunrise & sunrise < dd$finishdate,
-##        dd$finishdate-sunrise,
-##        notdark)
-## 
-## dd$indark2 <- round(  (dd$legtime.m - notdark)/dd$legtime.m  , 2)
  
 p.byleg <- 
  ggplot(dd) +
@@ -131,6 +110,8 @@ p.byleg <-
 print(p.byleg)
 
 ggsave(p.byleg,file="byleg.png")
+
+
 
 p.byrunner <- 
  ggplot(dd) +
