@@ -55,7 +55,7 @@ p.teambyrunner <-
   facet_wrap(~runner) + theme_bw()
 print(p.teambyrunner )
 
-ggsave(p.teambyrunner,file='teambyrunner.png')
+ggsave(p.teambyrunner,file='img/teambyrunner.png')
 
 ddrunners <- c('Nicholas','Kent','Jillian','Tracker','Will','Sarah','Brit','Caroline')
 sexrunners<- c('M'       ,'M'   ,'F'      ,'M'      ,'M'   ,'F'    ,'F'   ,'F'       )
@@ -109,7 +109,7 @@ p.byleg <-
   scale_color_gradient(low="lightblue",high="darkblue")
 print(p.byleg)
 
-ggsave(p.byleg,file="byleg.png")
+ggsave(p.byleg,file="img/byleg.png")
 
 
 
@@ -125,4 +125,4 @@ p.byrunner <-
   scale_fill_manual(values=c('lightgreen','yellow','pink'))
 print(p.byrunner)
 
-ggsave(file='byrunner.png',p.byrunner)
+ggsave(file='img/byrunner.png',p.byrunner)
